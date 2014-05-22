@@ -166,15 +166,11 @@ Yes, let me show you how:
 ```Haskell
 {-# LANGUAGE TypeFamilies  #-}
 module Control.Concurrent.Units
-  ( module ControlConcurrent -- I'm reexporting all of Control.Concurrent,
-                             -- but with a modified threadDelay
-                             -- probably not recomendable in Production ;)
-  , threadDelay
+  ( threadDelay
   , milli
   , micro
   ) where
 
-import Control.Concurrent as ControlConcurrent hiding (threadDelay)
 import qualified Control.Concurrent as Conc
 import Data.Metrology
 import Data.Metrology.SI
