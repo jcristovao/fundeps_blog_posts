@@ -384,18 +384,57 @@ So, this is mainly useless IMHO (and non-idiomatic Haskell), but feel free to us
 
 ### Basics (Part IX) | Lambdas
 
+So far we only dealt with named functions with all parameters fully specified.
+Haskell is one of several languages to offer anonymous functions.
+
+Well then... what is an anonymous function, and what is it good for?
+
+An anonymous function is a function definition that does not require a name (thus the anonymous part, duh),
+and its mostly useful anywhere you need a function (namely other function parameters that expect a function)
+but you don't feel the need to properly define a separate function, because you will not use this (anonymous)
+function again.
+
+But the current syntax does not allow for such a function to be defined, so we need a bit of extra syntax:
+
+```Haskell
 foo x y = x *y
 
-is the same as
+-- is the same as
 
 foo x= \y -> x*y
 
-and
-
+-- and is the same as
 foo = \x -> \y -> x*y
+```
 
+And there you go... ```\x -> \y -> x * y``` is an anonymous function, that takes two parameters.
 
+For comodity sake, you can simplify this to ```\x y -> x * y```, it is the same thing.
+But, as expected, ```\(x,y) -> x * y``` is not. The first function expects two parameters,
+the second expects a single
+parameter, which happens to be a two element tuple (pair). 
+It is easy to get confused if you're comming from other programming language.
 
+#### Example
+
+Take the ```comparing``` function from ```Data.Ord```:
+
+```Haskell
+comparing :: Ord a => (b -> a) -> b -> b -> Ordering
+```
+
+It accepts a function that transforms a type ```b```, 
+possibly even without an ```Ord``` instance, into another
+type ```a```, which in turn is suitable for comparison.
+Then it also accepts two ```b```'s, and it returns the result
+of their comparison, once they've been transformed into ```a```.
+
+This is excelent for comparing complex records based on
+only one of its fields, for example:
+
+```Haskell
+
+```
 
 
 
