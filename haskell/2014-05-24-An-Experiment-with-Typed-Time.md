@@ -126,9 +126,9 @@ import Data.Metrology
 import Data.Metrology.SI
 import Data.Metrology.Show
 
-let x :: Time ; let x = 5 % Second
-let y :: Time ; let y = 6 % milli Second
-let z = 5 |+| 6 
+let x = 5 %% Second
+let y = 6 %% milli Second
+let z = x |+| y 
 z
 > 5.006 s
 ```
@@ -220,11 +220,11 @@ instance Show Hour where
 
 This is just code copied from [units-defs](https://hackage.haskell.org/package/units-defs)
 Originally I defined ```Minute``` and ```Hour``` 
-as Prefixes, but ```5 % hour Second``` just didn't feel right.
+as Prefixes, but ```5 %% hour Second``` just didn't feel right.
 With the above implementation, I can just type:
 
 ```Haskell
-threadDelay (2.5 % Minute)
+threadDelay (2.5 %% Minute)
 ```
 
 #### Is this a good solution?
